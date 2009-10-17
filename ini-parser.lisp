@@ -5,7 +5,9 @@
 (defpackage :ini-parser
   (:use :cl :cl-ppcre)
   (:export :iniParser
-	   :parse-file))
+	   :parse-file
+	   :file
+	   :contents))
 
 (in-package :ini-parser)
 
