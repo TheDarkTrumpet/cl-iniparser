@@ -7,7 +7,8 @@
   (:export :iniParser
 	   :parse-file
 	   :file
-	   :contents))
+	   :contents
+	   :getCFGSections))
 
 (in-package :ini-parser)
 
@@ -21,6 +22,7 @@
     :reader :contents)))
 
 (defgeneric parse-file (iniParser))
+(defgeneric getCFGSections (iniParser))
 
 (defmethod parse-file ((iniobj iniParser))
   (let ((newheader nil))
@@ -35,4 +37,12 @@
 				  (setf (gethash header contents) (make-hash-table))
 				  ))))))))
 
+(defmethod getCFGSections ((iniobj iniParser))
+  (let ((sections (list)))
+    (with-slots (contents) iniobj
+      (maphash #'(lambda (k v)
+		   (declare (ignore v))
+		   (setf sections (nconc sections (list k))))
+	       contents))
+    sections))
 
