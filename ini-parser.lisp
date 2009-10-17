@@ -3,7 +3,9 @@
 ; (in-package :ini-parser)
 
 (defpackage :ini-parser
-  (:use :cl :cl-ppcre))
+  (:use :cl :cl-ppcre)
+  (:export :iniParser
+	   :parse-file))
 
 (in-package :ini-parser)
 
